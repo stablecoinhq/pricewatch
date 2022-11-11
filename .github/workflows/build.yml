@@ -23,6 +23,8 @@ jobs:
           --health-retries 5
 
     steps:
+    - uses: actions/checkout@v2
+
     - name: Show Docker containers
       run: docker ps -a
     - name: Prepare databases for test user
@@ -30,13 +32,12 @@ jobs:
     - name: Show databases for pricewatch_test_user
       run: mysql --protocol=tcp -h localhost -P 3306 -u pricewatch_test_user -ppricewatch_test_pass -e "SHOW DATABASES"
 
-    - run: node -v
-    - run: yarn -v
-    - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '16.x'
+    - run: node -v
+    - run: yarn -v
     - run: yarn install
     - run: yarn generate-types
     - run: yarn lint
