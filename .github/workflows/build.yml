@@ -22,7 +22,7 @@ jobs:
 
     - name: save pricewatch binary
       uses: actions/upload-artifact@v2
-      if: !failure()
+      if: ${{ success() }}
       with:
         name: pricewatch binary
         path: ./pricewatch
