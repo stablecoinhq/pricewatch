@@ -1,9 +1,7 @@
 import { providers } from "ethers"
 import { Vat__factory } from '../types/ethers-contracts/factories/Vat__factory'
 import { exchanges } from "ccxt"
-import dotenv from "dotenv"
-
-dotenv.config();
+require("dotenv").config();
 
 const main = async () => {
     const RPC_HOST = `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY!}`
