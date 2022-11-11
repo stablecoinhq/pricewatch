@@ -41,6 +41,7 @@ jobs:
     - run: yarn install
     - run: yarn generate-types
     - run: yarn lint
+    - run: cp .env.example .env
     - run: yarn test
     - run: yarn generate-linux-binary
 
