@@ -16,4 +16,13 @@ jobs:
         node-version: '16.x'
     - run: yarn install
     - run: yarn generate-types
+    - run: yarn lint
+    - run: yarn test
     - run: yarn generate-linux-binary
+
+    - name: save pricewatch binary
+      uses: actions/upload-artifact@v2
+      if: !failure()
+      with:
+        name: pricewatch binary
+        path: ./pricewatch

@@ -1,18 +1,14 @@
-import { providers } from "ethers"
-import { Vat__factory } from '../types/ethers-contracts/factories/Vat__factory'
-import { exchanges } from "ccxt"
-require("dotenv").config();
+import { Scheduler, Logger } from './core';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
+// validation check, start scheduler
 const main = async () => {
-    const RPC_HOST = `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY!}`
-    const provider = new providers.JsonRpcProvider(RPC_HOST)
-    const address = "0x1b1FE236166eD0Ac829fa230afE38E61bC281C5e"
-    const vat = Vat__factory.connect(address, provider)
-    const Line = await vat.Line()
-    console.log(Line.toString())
-    console.log(exchanges)
+    const scheduler = new Scheduler()
+    await scheduler.run()
 }
 
 main().catch(error => {
-    console.log(error)
+    const logger = Logger.getLogger()
+    logger.debug(`error in main(): ${error}`)
 })
